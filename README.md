@@ -1,7 +1,7 @@
 # Dockerized Bedrock Server
 This project is a simple dockerized environment in which to run a minecraft java vanilla server. The main goals vs existing solutions are simple persistence (bind mounts to easily modify+backup world and config data), keeping a slim image (alpine based, minimal layers), and easy iterability (change one URL to rebuild to build a new version or texture pack).
 
-The Docker Hub page can be found at [this link]([https://hub.docker.com/repository/docker/tarfeef101/mc_java_vanilla](https://hub.docker.com/repository/docker/tarfeef101/mc_java_vanilla)).
+The Docker Hub page can be found at [this link](https://hub.docker.com/repository/docker/tarfeef101/mc_java_vanilla).
 
 ## Anatomy
 ```
