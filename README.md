@@ -23,3 +23,6 @@ The Dockerfile tries to keep the image as simple and slim as possible. A slim ba
 
 ### worlds/
 This is the bind-mounted directory which will house your world data. This should be empty unless you have a pre-existing world you want to import. If you want to add resource packs, this is the place to put them.
+
+## Building
+To build a new version, search for the JAR you're looking for at [MCVersions](https://mcversions.net/). Then, in the `docker-compose.yaml` file, set the `build` argument `JAR` to the URL of the file you wish to use. Then, run `docker-compose build` or `docker-compose up --build -d` (to just build, or build and start the server).

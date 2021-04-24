@@ -4,11 +4,13 @@ WORKDIR /opt/
 
 ENV MIN_MEM=1 MAX_MEM=16
 
+ARG JAR=https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
+
 # download+unpack & move configs to 1 folder
 # this allows for less volumes
 # ty @Roemer for the idea
 RUN apk add curl && \
-    curl -sSL https://launcher.mojang.com/v1/objects/b58b2ceb36e01bcd8dbf49c8fb66c55a9f0676cd/server.jar -o server.jar && \
+    curl -sSL $JAR -o server.jar && \
     apk del curl && \
     echo "eula=true" > eula.txt && \
     mkdir config && \
