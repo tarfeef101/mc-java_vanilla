@@ -3,7 +3,7 @@ version: '3'
 services:
   minecraft:
     build: .
-      context: .
+      context:
       args:
         JAR: https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
     image: mc_java_vanilla:alpine-1.15.2
@@ -13,10 +13,9 @@ services:
       - "8008:25565"
     volumes:
       - "./worlds:/opt/worlds"
+      - "./config:/opt/config"
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "1"
-
-      - "./config:/opt/config"
