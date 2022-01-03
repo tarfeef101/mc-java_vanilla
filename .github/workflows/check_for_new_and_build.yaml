@@ -1,0 +1,30 @@
+name: Check for new releases, and build
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check_and_build:
+    name: Check for new releases, and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get latest version
+        run: |
+          curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release' > /tmp/version
+          echo "version=$(cat /tmp/version)" >> $GITHUB_ENV
+
+      - name: Build and push
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          VERSION: ${{ env.version }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+          docker-compose build --build-arg VERSION=$VERSION
+          docker tag tarfeef101/mc_java_vanilla:latest tarfeef101/mc_java_vanilla:$VERSION
+          docker push tarfeef101/mc_java_vanilla:$VERSION
