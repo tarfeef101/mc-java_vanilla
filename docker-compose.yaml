@@ -7,10 +7,13 @@ services:
       args:
         VERSION: 1.18.1
     image: tarfeef101/mc_java_vanilla:alpine-1.18.1
-    container_name: mc_javas
+    container_name: mc_java
     restart: on-failure
+    environment:
+      MIN_MEM: 512m
+      MAX_MEM: 2048m
     ports:
-      - "8009:25565"
+      - "8008:25565"
     volumes:
       - "./worlds:/opt/worlds"
       - "./config:/opt/config"

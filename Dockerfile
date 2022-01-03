@@ -2,7 +2,7 @@ FROM openjdk:18-alpine
 
 WORKDIR /opt/
 
-ENV MIN_MEM=1 MAX_MEM=16
+ENV MIN_MEM=512m MAX_MEM=4G
 
 ARG VERSION=1.18.1
 
@@ -21,4 +21,4 @@ RUN apk add curl && \
     ln -s config/banned-ips.json banned-ips.json && \
     ln -s config/banned-players.json banned-players.json
 
-CMD java -Xms${MIN_MEM}G -Xmx${MAX_MEM}G -jar server.jar nogui
+CMD java -Xms${MIN_MEM} -Xmx${MAX_MEM} -jar server.jar nogui
