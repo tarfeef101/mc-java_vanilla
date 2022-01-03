@@ -1,16 +1,16 @@
-FROM openjdk:8-alpine
+FROM openjdk:18-alpine
 
 WORKDIR /opt/
 
 ENV MIN_MEM=1 MAX_MEM=16
 
-ARG JAR=https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
+ARG VERSION=1.18.1
 
 # download+unpack & move configs to 1 folder
 # this allows for less volumes
 # ty @Roemer for the idea
 RUN apk add curl && \
-    curl -sSL $JAR -o server.jar && \
+    curl -sSL $(curl -sSL https://mcversions.net/download/${VERSION} | grep -o 'https://launcher.mojang.com.*server.jar') -o server.jar && \
     apk del curl && \
     echo "eula=true" > eula.txt && \
     mkdir config && \
