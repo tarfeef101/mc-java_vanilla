@@ -2,13 +2,16 @@ version: '3'
 
 services:
   minecraft:
-    build: .
-      context:
+    build:
+      context: .
       args:
-        JAR: https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
-    image: mc_java_vanilla:alpine-1.15.2
+        VERSION: 1.18.1
+    image: tarfeef101/mc_java_vanilla:latest
     container_name: mc_java
     restart: on-failure
+    environment:
+      MIN_MEM: 512m
+      MAX_MEM: 2048m
     ports:
       - "8008:25565"
     volumes:

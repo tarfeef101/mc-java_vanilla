@@ -1,16 +1,16 @@
-FROM openjdk:8-alpine
+FROM openjdk:18-alpine
 
 WORKDIR /opt/
 
-ENV MIN_MEM=1 MAX_MEM=16
+ENV MIN_MEM=512m MAX_MEM=4G
 
-ARG JAR=https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
+ARG VERSION=1.18.1
 
 # download+unpack & move configs to 1 folder
 # this allows for less volumes
 # ty @Roemer for the idea
 RUN apk add curl && \
-    curl -sSL $JAR -o server.jar && \
+    curl -sSL $(curl -sSL https://mcversions.net/download/${VERSION} | grep -o 'https://launcher.mojang.com.*server.jar') -o server.jar && \
     apk del curl && \
     echo "eula=true" > eula.txt && \
     mkdir config && \
@@ -21,4 +21,4 @@ RUN apk add curl && \
     ln -s config/banned-ips.json banned-ips.json && \
     ln -s config/banned-players.json banned-players.json
 
-CMD java -Xms${MIN_MEM}G -Xmx${MAX_MEM}G -jar server.jar nogui
+CMD java -Xms${MIN_MEM} -Xmx${MAX_MEM} -jar server.jar nogui
