@@ -3,6 +3,13 @@ This project is a simple dockerized environment in which to run a minecraft java
 
 The Docker Hub page can be found at [this link](https://hub.docker.com/repository/docker/tarfeef101/mc_java_vanilla).
 
+## Usage
+You should be able to run with a simple `docker-compose up -d`. However, you should first:
+- add your config files as described below
+- check the compose file and set your memory thresholds appropriately
+- check the compose file to set the image to the version you want.
+- potentially build if that image/version is not available
+
 ## Anatomy
 ```
 .
