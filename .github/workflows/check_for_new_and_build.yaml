@@ -3,7 +3,6 @@ name: Check for new releases, and build
 on:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
 
 jobs:
   check_and_build:
